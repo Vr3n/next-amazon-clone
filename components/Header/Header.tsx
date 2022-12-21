@@ -3,6 +3,7 @@ import AmazonLogo from "../../public/amazon_logo.png";
 import {
   ShoppingCartIcon,
   MagnifyingGlassIcon,
+  Bars3Icon,
 } from "@heroicons/react/24/outline";
 
 const Header = () => {
@@ -44,6 +45,22 @@ const Header = () => {
             <p className="link-item hidden mt-2 md:inline">Cart</p>
           </li>
         </ul>
+      </nav>
+      {/* Bottom Navigation */}
+      <nav className="flex items-center bg-amazon_blue-light text-white text-sm p-2 pl-6 space-x-3">
+        <p className="flex link items-center">
+          <Bars3Icon className="h-6 mr-1" />
+          All
+        </p>
+        <p className="link">Prime Video</p>
+        <p className="link">Amazon Business</p>
+        <p className="link">Todays deals</p>
+        <p className="link hidden lg:inline-flex">Electronics</p>
+        <p className="link hidden lg:inline-flex">Food & Grocery</p>
+        <p className="link hidden lg:inline-flex">Prime</p>
+        <p className="link hidden lg:inline-flex">Buy Again</p>
+        <p className="link hidden lg:inline-flex">Shopper Toolkit</p>
+        <p className="link hidden lg:inline-flex">Health & Personal Care</p>
       </nav>
     </header>
   );

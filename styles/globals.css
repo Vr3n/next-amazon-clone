@@ -10,4 +10,8 @@
   .link-item {
     @apply font-extrabold md:text-sm;
   }
+
+  .button {
+    @apply px-10 py-2 bg-yellow-400 shadow-md text-black rounded-md hover:shadow-lg active:shadow-sm;
+  }
 }

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { StarIcon } from "@heroicons/react/24/solid";
 import Currency from "react-currency-formatter";
 import PrimeCheckMark from "../../public/prime_checkmark.png";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../../slice/basketSlice";
 
 interface ProductFeedProps {
   products: IProduct[];
@@ -10,7 +12,7 @@ interface ProductFeedProps {
 
 const ProductFeed: React.FC<ProductFeedProps> = ({ products }) => {
   return (
-    <div className="px-5 space-x-3 space-y-3 grid grid-flow-row-dense mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-80">
+    <div className="grid grid-flow-row-dense mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-52">
       {products.map((product) => (
         <Product product={product} key={product.id} />
       ))}
@@ -26,17 +28,30 @@ interface ProductProps {
 
 const Product: React.FC<ProductProps> = ({ product }) => {
   const [hasPrime, setHasPrime] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setHasPrime(Math.random() < 0.5);
   }, []);
 
+  const addItemToCart = () => {
+    dispatch(addToBasket(product));
+  };
+
   return (
-    <div className=" relative p-5 shadow-md bg-white flex flex-col items-center gap-2 z-20">
+    <div className="relative flex flex-col m-5 bg-white z-30 p-10 rounded-md shadow-md">
       <p className="absolute top-2 right-2 text-xs italic text-gray-400">
         {product.category}
       </p>
-      <img src={product.image} className="h-20 w-20" alt={product.title} />
+      <Image
+        src={product.image}
+        height={100}
+        width={100}
+        style={{ objectFit: "contain" }}
+        className="self-center"
+        alt={product.title}
+      />
+      <h4 className="my-3">{product.title}</h4>
       <div className="flex">
         {Array(Math.round(product.rating.rate))
           .fill({})
@@ -49,16 +64,14 @@ const Product: React.FC<ProductProps> = ({ product }) => {
         <Currency quantity={product.price} currency="GBP" />
       </div>
       {hasPrime && (
-        <div className="inline-flex items-center space-x-2 -mt-5">
-          <Image
-            src={PrimeCheckMark}
-            alt="Prime check mark"
-            className="h-10 w-20"
-          />
+        <div className="flex items-center space-x-2 -mt-5">
+          <Image src={PrimeCheckMark} alt="Prime check mark" className="w-12" />
           <p className="text-xs text-gray-500">Free Next-day Delivery</p>
         </div>
       )}
-      <button className="button">Add to Cart</button>
+      <button onClick={() => addItemToCart()} className="mt-auto button">
+        Add to Cart
+      </button>
     </div>
   );
 };

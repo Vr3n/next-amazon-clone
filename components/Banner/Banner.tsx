@@ -16,7 +16,7 @@ const Banner = () => {
         showIndicators={false}
         showThumbs={false}
         interval={5000}
-        dynamicHeight
+        dynamicHeight={false}
       >
         <div>
           <Image loading="lazy" src={Banner1} alt="banner1" />

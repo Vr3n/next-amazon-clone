@@ -12,6 +12,6 @@
   }
 
   .button {
-    @apply px-10 py-2 bg-yellow-400 shadow-md text-black rounded-md hover:shadow-lg active:shadow-sm;
+    @apply px-10 py-2 transition-all delay-150 text-sm text-black bg-gradient-to-b from-yellow-400 to-yellow-500 hover:scale-105 active:scale-95 shadow-md rounded-md hover:shadow-lg active:shadow-sm;
   }
 }

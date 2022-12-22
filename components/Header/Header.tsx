@@ -5,13 +5,23 @@ import {
   MagnifyingGlassIcon,
   Bars3Icon,
 } from "@heroicons/react/24/outline";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { selectItems } from "../../slice/basketSlice";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const { data: session, status } = useSession();
+
+  const router = useRouter();
+  const items = useSelector(selectItems);
+
   return (
     <header>
       <nav className="flex items-center bg-amazon_blue px-5 flex-grow py-2 gap-5">
         <div className="mt-2 flex items-center flex-grow sm:flex-grow-0 mr-3">
           <Image
+            onClick={() => router.push("/")}
             src={AmazonLogo}
             alt="amazon logo"
             width={150}
@@ -29,17 +39,29 @@ const Header = () => {
           <MagnifyingGlassIcon className="h-12 p-4" />
         </div>
         <ul className="text-white flex items-center text-xs space-x-6">
-          <li className="link">
-            <p>Hello, Viren Patel</p>
+          <li
+            className="link"
+            onClick={() => {
+              if (session) {
+                signOut();
+              } else {
+                signIn();
+              }
+            }}
+          >
+            <p>{session ? `Hello, ${session.user?.name}` : `Sign In`}</p>
             <p className="link-item">Account & Lists</p>
           </li>
           <li className="link">
             <p>Returns</p>
             <p className="link-item">& Orders</p>
           </li>
-          <li className="relative link flex items-center">
+          <li
+            className="relative link flex items-center"
+            onClick={() => router.push("/checkout")}
+          >
             <span className="absolute top-0 right-0 h-4 w-6 bg-yellow-400 text-center text-black rounded-full md:right-5">
-              0
+              {items.length}
             </span>
             <ShoppingCartIcon className="h-10" />
             <p className="link-item hidden mt-2 md:inline">Cart</p>

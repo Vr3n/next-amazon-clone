@@ -56,7 +56,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
         {Array(Math.round(product.rating.rate))
           .fill({})
           .map((_, idx) => (
-            <StarIcon className="h-5 text-yellow-500" />
+            <StarIcon key={idx} className="h-5 text-yellow-500" />
           ))}
       </div>
       <p className="text-xs my-2 line-clamp-2">{product.description}</p>

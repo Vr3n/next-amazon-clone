@@ -12,7 +12,7 @@ const Home: NextPage<HomeProps> = ({ products }) => {
   return (
     <div className="bg-gray-100">
       <Head>
-        <title>Create Next App</title>
+        <title>Amazon Clone</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
